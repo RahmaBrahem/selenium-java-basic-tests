@@ -1,5 +1,5 @@
-<h1 align="center">🧰 Selenium Java Basic Test Automation</h1>
-<p align="center"><i>Premier projet d’automatisation de tests UI avec Java & Selenium, intégrant TestNG, rapports ExtentReports et gestion vidéo</i></p>
+<h1 align="center">🧰 End-to-End UI Test Automation – Selenium Java TestNG</h1>
+<p align="center"><i>Framework de test avec ExtentReports, capture vidéo et gestion des cas de test</i></p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white" />
