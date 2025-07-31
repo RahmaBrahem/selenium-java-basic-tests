@@ -1,0 +1,15 @@
+# Configuration du navigateur
+browser=chrome
+
+# Identifiants pour les tests
+fake_username=utilisateur_faux
+wrong_password=mot_de_passe_faux
+locked_out_username=utilisateur_verrouillé
+password=mot_de_passe_valide
+valid_username=username_valide
+First_Name=nom
+Last_Name=prénom
+Zip_Postal_Code=code
+
+# URL de l'application à tester
+url=https://www.exemple.com
