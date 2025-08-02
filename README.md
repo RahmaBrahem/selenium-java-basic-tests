@@ -35,12 +35,12 @@ Le projet est organisé de manière basique :
 
 - Connexion avec identifiants invalides  
 - Connexion avec utilisateur verrouillé (locked out)  
-- Connexion avec identifiants valides  
+- Connexion avec identifiants valides 
+- Filtrage des produits par prix (low to high) 
 - Ajout au panier  
 - Visualisation du panier  
 - Suppression d’articles du panier  
-- Passage au paiement (checkout)  
-- Filtrage des produits par prix (low to high)  
+- Passage au paiement (checkout)    
 - Déconnexion  
 
 ## 🔧 Technologies utilisées
