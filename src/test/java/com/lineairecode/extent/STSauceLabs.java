@@ -213,11 +213,46 @@ public class STSauceLabs {
 	}
 
 	@Test(priority = 4)
+	public void filterProductsTest() throws IOException {
+		test = extent.createTest("Filter Products Test");
+		try {
+
+			WebElement filterDropdown = wait
+					.until(ExpectedConditions.elementToBeClickable(By.className("product_sort_container")));
+			filterDropdown.click();
+
+			WebElement lowToHighOption = wait.until(ExpectedConditions
+					.elementToBeClickable(By.xpath("//option[contains(text(), 'Price (low to high)')]")));
+			lowToHighOption.click();
+
+			List<WebElement> productPrices = driver.findElements(By.className("inventory_item_price"));
+			boolean isSorted = true;
+			double previousPrice = 0.0;
+
+			for (WebElement priceElement : productPrices) {
+				double currentPrice = Double.parseDouble(priceElement.getText().replace("$", ""));
+				if (currentPrice < previousPrice) {
+					isSorted = false;
+					break;
+				}
+				previousPrice = currentPrice;
+			}
+
+			Assert.assertTrue(isSorted, "Les produits ne sont pas triés par prix!");
+
+			test.pass("Filtre des produits appliqué avec succès.");
+		} catch (AssertionError e) {
+			test.fail("Echec de l'application du filtre des produits: " + e.getMessage());
+			throw e;
+		}
+	}
+
+	@Test(priority = 5)
 	public void addToCartTest() throws IOException {
 		test = extent.createTest("Add To Cart Test");
 		try {
-			WebElement firstProduct = wait.until(ExpectedConditions.visibilityOfElementLocated(
-					By.xpath("/html/body/div/div/div/div[2]/div/div/div/div[1]/div[2]/div[2]/button")));
+			WebElement firstProduct = wait
+					.until(ExpectedConditions.visibilityOfElementLocated(By.id("add-to-cart-sauce-labs-backpack")));
 			firstProduct.click();
 
 			WebElement cartBadge = wait
@@ -233,7 +268,7 @@ public class STSauceLabs {
 		}
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 6)
 	public void viewCartTest() throws IOException {
 		test = extent.createTest("View Cart Test");
 		try {
@@ -253,7 +288,7 @@ public class STSauceLabs {
 		}
 	}
 
-	@Test(priority = 6)
+	@Test(priority = 7)
 	public void removeFromCartTest() throws IOException {
 		test = extent.createTest("Remove From Cart Test");
 		try {
@@ -270,7 +305,7 @@ public class STSauceLabs {
 		}
 	}
 
-	@Test(priority = 7)
+	@Test(priority = 8)
 	public void checkOutTest() throws IOException {
 		test = extent.createTest("Check Out Test");
 		try {
@@ -299,43 +334,6 @@ public class STSauceLabs {
 			test.pass("Checkout completed successfully.");
 		} catch (AssertionError e) {
 			test.fail("Checkout failed: " + e.getMessage());
-			throw e;
-		}
-	}
-
-	@Test(priority = 8)
-	public void filterProductsTest() throws IOException {
-		test = extent.createTest("Filter Products Test");
-		try {
-			WebElement backToHomeButton = driver.findElement(By.id("back-to-products"));
-			backToHomeButton.click();
-
-			WebElement filterDropdown = wait
-					.until(ExpectedConditions.elementToBeClickable(By.className("product_sort_container")));
-			filterDropdown.click();
-
-			WebElement lowToHighOption = wait.until(ExpectedConditions
-					.elementToBeClickable(By.xpath("//option[contains(text(), 'Price (low to high)')]")));
-			lowToHighOption.click();
-
-			List<WebElement> productPrices = driver.findElements(By.className("inventory_item_price"));
-			boolean isSorted = true;
-			double previousPrice = 0.0;
-
-			for (WebElement priceElement : productPrices) {
-				double currentPrice = Double.parseDouble(priceElement.getText().replace("$", ""));
-				if (currentPrice < previousPrice) {
-					isSorted = false;
-					break;
-				}
-				previousPrice = currentPrice;
-			}
-
-			Assert.assertTrue(isSorted, "Les produits ne sont pas triés par prix!");
-
-			test.pass("Filtre des produits appliqué avec succès.");
-		} catch (AssertionError e) {
-			test.fail("Echec de l'application du filtre des produits: " + e.getMessage());
 			throw e;
 		}
 	}
